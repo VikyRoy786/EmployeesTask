@@ -8,18 +8,18 @@ using System.Composition.Convention;
 namespace EmployeesTask.Controllers
 {
     public class EmployeeController : Controller
-    {
+    {private readonly EmployeeDbContext _employeeDbContext;
         public EmployeeController( EmployeeDbContext employeeDbContext)
         {
-            EmployeeDbContext = employeeDbContext;
+            _employeeDbContext = employeeDbContext;
         }
 
-        public EmployeeDbContext EmployeeDbContext { get; }
+       
 
         [HttpGet]
         public async Task< IActionResult >Index()
         {
-           var emp = await EmployeeDbContext.Employees.ToListAsync();
+           var emp = await _employeeDbContext.Employees.ToListAsync();
             return View(emp);
 
         }
@@ -44,14 +44,14 @@ namespace EmployeesTask.Controllers
                 EmailAddress = addEmployee.EmailAddress,
                 PhoneNo = addEmployee.PhoneNo,
             };
-           await EmployeeDbContext.Employees.AddAsync(employee);
-           await EmployeeDbContext.SaveChangesAsync();
+           await _employeeDbContext.Employees.AddAsync(employee);
+           await _employeeDbContext.SaveChangesAsync();
             return RedirectToAction("Index");
         }
         [HttpGet]
         public async Task<IActionResult> View(int Id)
         {
-            var emp = await EmployeeDbContext.Employees.FirstOrDefaultAsync(  x => x.EmployeeId == Id);
+            var emp = await _employeeDbContext.Employees.FirstOrDefaultAsync(  x => x.EmployeeId == Id);
             if (emp != null)
             {
                 var view = new UpdateViewModel()
@@ -76,7 +76,7 @@ namespace EmployeesTask.Controllers
         [HttpPost]
         public async Task<IActionResult>View (UpdateViewModel model)
         {
-            var employee = await EmployeeDbContext.Employees.FindAsync(model.EmployeeId);
+            var employee = await _employeeDbContext.Employees.FindAsync(model.EmployeeId);
                 if(employee != null)
             {
                 employee.FirstName = model.FirstName;
@@ -88,7 +88,7 @@ namespace EmployeesTask.Controllers
                 employee.Qualification = model.Qualification;
                 employee.EmailAddress = model.EmailAddress;
                 employee.PhoneNo = model.PhoneNo;
-                await EmployeeDbContext.SaveChangesAsync();
+                await _employeeDbContext.SaveChangesAsync();
 
                 return RedirectToAction("Index");
             }
@@ -98,11 +98,11 @@ namespace EmployeesTask.Controllers
         
         public async Task<IActionResult>Delete(UpdateViewModel model)
         {
-            var emp = await EmployeeDbContext.Employees.FindAsync(model.EmployeeId);
+            var emp = await _employeeDbContext.Employees.FindAsync(model.EmployeeId);
             if(emp != null)
             {
-                EmployeeDbContext.Employees.Remove(emp);
-                await EmployeeDbContext.SaveChangesAsync();
+                _employeeDbContext.Employees.Remove(emp);
+                await _employeeDbContext.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return RedirectToAction("Index");
