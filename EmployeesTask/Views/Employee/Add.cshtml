@@ -1,0 +1,44 @@
+﻿@model Employee
+@{
+}
+<h1>Add Employee</h1>
+<form method="post" action ="Add">
+<div class="mb-3">
+<label for="exampleFirstName" class="form-label">FirstName</label>
+<input type="Text" class="form-control" asp-for="FirstName" />
+</div>
+    <div class="mb-3">
+        <label for="ExampleLastname" class="form-label">LastName</label>
+        <input type="Text" class="form-control" asp-for="LastName" />
+    </div>
+    <div class="mb-3">
+        <label for="exampleDOB" class="form-label">DateOfBirth</label>
+        <input type="date" class="form-control" asp-for="DateOfBirth" />
+    </div>
+    <div class="mb-3">
+        <label for="exampleCity" class="form-label">City</label>
+        <input type="Text" class="form-control" asp-for="City" />
+    </div>
+    <div class="mb-3">
+<label for="exampleState" class="form-label">State</label>
+<input type="Text" class="form-control" asp-for="State" />
+</div>
+    <div class="mb-3">
+        <label for="exampleQualification" class="form-label">Country</label>
+        <input type="Text" class="form-control" asp-for="Qualification" />
+    </div>
+    <div class="mb-3">
+        <label for="exampleCountry" class="form-label">Qualification</label>
+        <input type="Text" class="form-control" asp-for="Country" />
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmaill" class="form-label">EmailAddress</label>
+        <input type="email" class="form-control" asp-for="EmailAddress" />
+
+    </div>
+    <div class="mb-3">
+        <label for="exampleNumber" class="form-label">PhoneNumber</label>
+        <input type="number" class="form-control" asp-for="PhoneNo" />
+    </div>
+<button type="submit" class="btn btn-primary">Submit</button>
+</form>

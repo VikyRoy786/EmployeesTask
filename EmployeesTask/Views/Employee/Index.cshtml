@@ -1,0 +1,40 @@
+﻿@model List<Employee>
+
+<h1>Employees</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>EmployeeId</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>DateOfBirth</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Country</th>
+            <th>Qualification</th>
+            <th>EmailAddress</th>
+            <th>Phone Number</th>
+            <th>
+</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var employee  in Model)
+        {
+            <tr>
+                <td>@employee.EmployeeId</td>
+                 <td>@employee.FirstName</td>
+                <td>@employee.LastName</td>
+                <td>@employee.DateOfBirth.ToString("dd-mm-yy")</td>
+                <td>@employee.City</td>
+                <td>@employee.State</td>
+                <td>@employee.Country</td>
+                <td>@employee.Qualification</td>
+                <td>@employee.EmailAddress</td>
+                <td>@employee.PhoneNo</td>
+                <td><a href = "Employee/View/@employee.EmployeeId">View</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
